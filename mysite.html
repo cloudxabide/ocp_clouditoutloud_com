@@ -31,7 +31,7 @@ For an overview of my HomeLab, visit <A HREF="https://github.com/cloudxabide/ocp
 <BR>
 This webpage was built the following... <BR>
 <UL>
-<LI>Create a Git Repo (https://github.com/cloudxabide/www_clouditoutloud_com <BR>
+<LI>Create a Git Repo (https://github.com/cloudxabide/ocp_clouditoutloud_com <BR>
 <LI>Update the repo using code from an example S2I (source to image) webpage build. <BR>
 <LI>Clone repo to local host (this is where I will make updates) <BR>
 <LI>Create project in OpenShift using the repo as teh source <BR>
@@ -43,15 +43,15 @@ This webpage was built the following... <BR>
 
 <H3> Clone Repo locally </H3>
 <div class="code">
-git clone git@github.com:cloudxabide/www_clouditoutloud_com.git<BR>
-cd www_clouditoutloud_com
+git clone git@github.com:cloudxabide/ocp_clouditoutloud_com.git<BR>
+cd ocp_clouditoutloud_com
 </div>
 
 <H3> Create Project in OpenShift </H3>
 <div class="code">
 MYPROJ="welcomepage" <BR>
 oc new-project $MYPROJ --description="Welcome Page" --display-name="CioL Welcome Page" <BR>
-oc new-app httpd~https://github.com/cloudxabide/www_clouditoutloud_com/ <BR>
+oc new-app httpd~https://github.com/cloudxabide/ocp_clouditoutloud_com/ <BR>
 <BR>
 echo '{ "kind": "List", "apiVersion": "v1", "metadata": {}, "items": [ { "kind": "Route", "apiVersion": "v1", "metadata": { "name": "wwwclouditoutloudcom", "creationTimestamp": null, "labels": { "app": "wwwclouditoutloudcom" } }, "spec": { "host": "www.clouditoutloud.com", "to": { "kind": "Service", "name": "wwwclouditoutloudcom" }, "port": { "targetPort": 8080 }, "tls": { "termination": "edge" } }, "status": {} } ] }' | oc create -f - <BR>
 </div>
